@@ -1,0 +1,5 @@
+server:
+  port: 8080
+
+restserver:
+  address: localhost:8765
