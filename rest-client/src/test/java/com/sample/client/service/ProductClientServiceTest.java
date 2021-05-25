@@ -1,14 +1,15 @@
-package com.sample.service;
+package com.sample.client.service;
 
-import com.sample.config.RestTemplateConfig;
-import com.sample.domain.Product;
-import com.sample.utils.RestClient;
+import com.sample.client.config.RestTemplateConfig;
+import com.sample.client.domain.Product;
+import com.sample.client.utils.RestClient;
 import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.test.util.ReflectionTestUtils;
 
 /**
  * rest-server 가 실행중인 상태에서 테스트 코드를 실행해야 함
@@ -21,7 +22,8 @@ public class ProductClientServiceTest {
   @Before
   public void setUp() {
     RestTemplateConfig template = new RestTemplateConfig();
-    RestClient restClient = new RestClient(template.restClient(), "http://localhost:8765");
+    RestClient restClient = new RestClient(template.restClientTemplate());
+    ReflectionTestUtils.setField(restClient, "restserverAddress", "http://localhost:8765");
     this.service = new ProductClientService(restClient);
   }
 

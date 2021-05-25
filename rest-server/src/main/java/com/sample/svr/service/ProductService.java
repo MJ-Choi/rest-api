@@ -1,6 +1,6 @@
-package com.sample.service;
+package com.sample.svr.service;
 
-import com.sample.domain.Product;
+import com.sample.svr.domain.Product;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;

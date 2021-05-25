@@ -1,10 +1,10 @@
-package com.sample.service;
+package com.sample.client.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sample.domain.Product;
-import com.sample.domain.Response;
-import com.sample.utils.RestClient;
+import com.sample.client.domain.Product;
+import com.sample.client.domain.Response;
+import com.sample.client.utils.RestClient;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class ProductClientService {
 
-  @Value("${restserver.address}")
+  @Value("${rest.svr}")
   private String restServer;
   private RestClient restClient;
 

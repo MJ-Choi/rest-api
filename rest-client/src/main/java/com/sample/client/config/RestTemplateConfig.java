@@ -1,4 +1,4 @@
-package com.sample.config;
+package com.sample.client.config;
 
 import org.apache.http.client.HttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
@@ -11,7 +11,7 @@ import org.springframework.web.client.RestTemplate;
 public class RestTemplateConfig {
 
   @Bean
-  public RestTemplate restClient() {
+  public RestTemplate restClientTemplate() {
     HttpComponentsClientHttpRequestFactory factory = new HttpComponentsClientHttpRequestFactory();
     factory.setReadTimeout(3000);                                 // Read T/O = 3s
     factory.setConnectTimeout(3000);                              // Connect T/O = 3s

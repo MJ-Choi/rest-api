@@ -1,14 +1,10 @@
-package com.sample.controller;
+package com.sample.svr.controller;
 
-import static com.sample.domain.Response.STATUS.FAILED;
-import static com.sample.domain.Response.STATUS.SUCCESS;
-import static com.sample.domain.Response.STATUS_MSG.EXIST;
-
-import com.sample.domain.Product;
-import com.sample.domain.Response;
-import com.sample.domain.Response.STATUS;
-import com.sample.domain.Response.STATUS_MSG;
-import com.sample.service.ProductService;
+import com.sample.svr.domain.Product;
+import com.sample.svr.domain.Response;
+import com.sample.svr.domain.Response.STATUS;
+import com.sample.svr.service.ProductService;
+import com.sample.svr.domain.Response.STATUS_MSG;
 import java.util.Optional;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
@@ -55,7 +51,7 @@ public class ProductController {
     log.debug("POST /product/register :: Product = {}", product);
     boolean svcResult = service.registerProduct(product);
     Response response = new Response(STATUS.getStatus(svcResult));
-    response.setMessage(svcResult ? null : EXIST.message());
+    response.setMessage(svcResult ? null : STATUS_MSG.EXIST.message());
     return response;
   }
 

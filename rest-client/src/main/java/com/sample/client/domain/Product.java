@@ -1,4 +1,4 @@
-package com.sample.domain;
+package com.sample.client.domain;
 
 import lombok.Builder;
 import lombok.Getter;

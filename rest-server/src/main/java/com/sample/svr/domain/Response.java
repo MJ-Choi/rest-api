@@ -1,4 +1,4 @@
-package com.sample.domain;
+package com.sample.svr.domain;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;

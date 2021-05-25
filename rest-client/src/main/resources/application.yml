@@ -1,5 +1,26 @@
 server:
   port: 8080
 
-restserver:
-  address: localhost:8765
+--- #local
+spring:
+  profiles:
+    active: local
+
+rest:
+  svr: localhost:8765
+
+logging:
+  level:
+    root: debug
+
+--- #prod
+spring:
+  profiles:
+    active: prod
+
+rest:
+  svr: localhost:8080
+
+logging:
+  level:
+    root: info

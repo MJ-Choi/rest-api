@@ -1,4 +1,4 @@
-package com.sample.domain;
+package com.sample.svr.domain;
 
 import lombok.Getter;
 import lombok.Setter;

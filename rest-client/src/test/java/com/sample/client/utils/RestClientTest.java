@@ -1,15 +1,17 @@
-package com.sample.utils;
+package com.sample.client.utils;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sample.config.RestTemplateConfig;
-import com.sample.domain.Product;
-import com.sample.domain.Response;
+import com.sample.client.config.RestTemplateConfig;
+import com.sample.client.domain.Product;
+import com.sample.client.domain.Response;
 import java.util.List;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.test.util.ReflectionTestUtils;
 
 /**
  * rest-server 가 실행중인 상태에서 테스트 코드를 실행해야 함
@@ -21,9 +23,14 @@ public class RestClientTest {
 
   private RestTemplateConfig template = new RestTemplateConfig();
 
-  private RestClient restClient = new RestClient(template.restClient(), svrAddr);
+  private RestClient restClient = new RestClient(template.restClientTemplate());
 
   private ObjectMapper mapper = new ObjectMapper();
+
+  @Before
+  public void setup() {
+    ReflectionTestUtils.setField(restClient, "restserverAddress", svrAddr);
+  }
 
   @Test
   public void post() {

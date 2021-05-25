@@ -1,4 +1,4 @@
-package com.sample.utils;
+package com.sample.client.utils;
 
 import static org.springframework.http.HttpMethod.GET;
 import static org.springframework.http.HttpMethod.POST;
@@ -6,6 +6,7 @@ import static org.springframework.http.HttpMethod.POST;
 import java.util.Collections;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -21,19 +22,22 @@ import org.springframework.web.client.RestTemplate;
 @Component
 public class RestClient {
 
-  private RestTemplate template;
+  private final RestTemplate template;
 
-  private String restServer; // REST_SERVER_IP:REST_SERVER_PORT
+  // TODO : @Value is not work. It get `null`
+  @Value("${rest.svr}")
+  private String restServerAddress; // REST_SERVER_IP:REST_SERVER_PORT
 
   @Autowired
   public RestClient(RestTemplate template) {
+    log.info("INIT :: restServer = {}", this.restServerAddress);
     this.template = template;
   }
 
-  public RestClient(RestTemplate template, String restServer) {
-    this.template = template;
-    this.restServer = restServer;
-  }
+//  public RestClient(RestTemplate template, String restServer) {
+//    this.template = template;
+//    this.restServer = restServer;
+//  }
 
   public String get(String uri) {
     log.debug("GET :: BASE URL = {}", cnvtUrl(uri));
@@ -70,12 +74,12 @@ public class RestClient {
   }
 
   private String cnvtUrl(String uri) {
-    log.debug("restServer = {}, uri = {}", restServer, uri);
-    return removeLastChar(restServer) + "/" + removeFirstChar(uri);
+    log.debug("restServer = {}, uri = {}", restServerAddress, uri);
+    return removeLastChar(restServerAddress) + "/" + removeFirstChar(uri);
   }
 
   private String cnvtUrl(String uri, String path) {
-    log.debug("restServer = {}, uri = {}, path = {}", restServer, uri, path);
+    log.debug("restServer = {}, uri = {}, path = {}", restServerAddress, uri, path);
     return removeLastChar(cnvtUrl(uri)) + "/" + removeFirstChar(path);
   }
 
