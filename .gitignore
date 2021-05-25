@@ -1,6 +1,5 @@
 .gradle/
 .idea/
-gradle/
 rest-client/build/
 rest-client/out/
 rest-server/build/
