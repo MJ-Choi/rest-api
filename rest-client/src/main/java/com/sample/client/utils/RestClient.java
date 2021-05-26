@@ -24,13 +24,11 @@ public class RestClient {
 
   private final RestTemplate template;
 
-  // TODO : @Value is not work. It get `null`
   @Value("${rest.svr}")
   private String restServerAddress; // REST_SERVER_IP:REST_SERVER_PORT
 
   @Autowired
   public RestClient(RestTemplate template) {
-    log.info("INIT :: restServer = {}", this.restServerAddress);
     this.template = template;
   }
 
